@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+	
+<html>
+	<head>
+		<title>Sorting an Array Based on User Input</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	
+	</head>	
+
+	<body ng-app="myApp">
+		<h1>AngularJS Tutorial: Root Scope and Filters</h1>	
+
+		<h2>Example #1: Root Scope</h2>	
+
+		<h3>The scope of the following element is:</h3>
+		<h3>{{whichScope}}</h3>
+
+		<div ng-controller="myCtrl">
+    			<h3>The scope of the following element is:</h3>
+    			<h3>{{whichScope}}</h3>
+		</div>
+
+		<h3>The scope of the following element is:</h3>
+		<h3>{{whichScope}}</h3>
+
+		<h2>Example #2: Adding Filters to Expressions</h2>
+		
+		<div ng-init="myText='Filters can be added in AngularJS to format data';
+				myCurrency=17;myArr=['HTML', 'CSS', 'AngularJS', 'JavaScript']">
+			<h3>{{myText | uppercase}}</h3>
+			
+			<h3>{{myText | lowercase}}</h3>
+			
+			<h3>17 formatted as currency appears as: {{myCurrency| currency}}</h3>
+	
+
+			<h3>Result of applying the filter 'va' to the array {{myArr}}:</h3>
+			
+			<ul>
+  				<li ng-repeat="elem in myArr | filter : 'va'">
+    					<h3>{{elem}}</h3>
+ 				 </li>
+			</ul>
+
+			
+			<h3>Result of applying the filter 'vac' to the array {{myArr}}:</h3>			
+
+			<ul>
+  				<li ng-repeat="elem in myArr | filter : 'vac'">
+    					<h3>{{elem}}</h3>
+ 				 </li>
+			</ul>
+
+			<h2>Example #3: Filtering an Array Based on User Input</h2>
+
+			<p><input type="text" ng-model="userFilter"></p>
+
+			<ul>
+ 				<li ng-repeat="elem in myArr | filter : userFilter">
+   				 	<h3>{{elem}}</h3>
+  				</li>
+			</ul>
+			
+			
+		</div>
+
+		<h2>Example #4: Filtering an Array Based on User Input</h2>
+		
+		<div ng-controller="myCtrl">
+
+			<table border="1" width="100%">
+  				<tr>
+   					<th ng-click="orderByMe('name')">Name</th>
+    					<th ng-click="orderByMe('role')">Role</th>
+  				</tr>
+  
+				<tr ng-repeat="elem in myArr2 | orderBy:myOrderBy">
+   					<td>{{elem.name}}</td>
+    					<td>{{elem.role}}</td>
+  				</tr>
+			</table>
+
+		</div>
+			
+
+		<script>
+			var app = angular.module('myApp', []);
+			
+			app.run(function($rootScope) {
+    				$rootScope.whichScope = 'The root scope';
+			});
+
+			app.controller('myCtrl', function($scope) {
+    				$scope.whichScope = "Not the root scope";
+
+				 $scope.myArr2 = [
+    					{name:'HTML',role:'content'},
+   					{name:'CSS',role:'style'},
+   					{name:'Javascript',role:'interactivity'},
+					{name:'AngularJS',role:'SPA'}
+				];
+
+				$scope.orderByMe = function(x) {
+    					$scope.myOrderBy = x;
+  				}
+
+				
+			});
+		</script>
+	</body>
+</html> 
